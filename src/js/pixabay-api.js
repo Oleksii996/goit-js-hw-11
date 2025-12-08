@@ -23,5 +23,5 @@ export async function getImagesByQuery(query) {
   };
 
   const response = await axios.get(BASE_URL, { params }); //,база + параметри
-  return response.data; //повертати значення властивості data з отриманої відповіді.....
+  return response.data; //повертати значення властивості data з отриманої відповіді..... ТЗ
 }
