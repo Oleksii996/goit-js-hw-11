@@ -15,8 +15,8 @@ import {
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-const form = document.querySelector('.form');
-const input = form ? form.querySelector('input[name="search-text"]') : null;
+const form = document.querySelector('.form'); //даю змінну на форму
+const input = document.querySelector('input[name="search-text"]'); //даю змінну на інпут
 
 form.addEventListener('submit', onSearch); //даю подію на форму ()
 

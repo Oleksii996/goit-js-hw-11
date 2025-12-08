@@ -55,14 +55,14 @@ export function createGallery(images) {
     )
     .join('');
 
-  galleryContainer.insertAdjacentHTML('beforeend', markup);
+  galleryContainer.insertAdjacentHTML('beforeend', markup); // розмітка
 
-  lightbox.refresh(); //
+  lightbox.refresh(); // скид
 }
 
 //Очищає вміст контейнера галереї
 export function clearGallery() {
-  if (!galleryContainer) return;
+  if (!galleryContainer) return; //
   galleryContainer.innerHTML = '';
 }
 
