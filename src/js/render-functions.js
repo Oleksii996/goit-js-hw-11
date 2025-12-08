@@ -7,16 +7,12 @@
 //hideLoader(). Ця функція нічого не приймає, повинна прибирати клас для відображення лоадера. Нічого не повертає. 
 */
 
+// SimpleLightbox
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const galleryContainer = document.querySelector('.gallery');
 const loaderElement = document.querySelector('.loader'); // очікується елемент для лоадера
-if (!galleryContainer) {
-  console.warn(
-    'render-functions.js: не знайдено елемент з класом .gallery — створіть його в HTML'
-  );
-}
 
 // Ініціалізація SimpleLightbox для селектора посилань у галереї
 const lightbox = new SimpleLightbox('.gallery a', {
@@ -24,14 +20,8 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-/**
- * Створює HTML-розмітку та додає у контейнер.
- * Викликає lightbox.refresh().
- * @param {Array} images - масив об'єктів з API (hits)
- */
+//функція на експорт у main.js
 export function createGallery(images) {
-  if (!Array.isArray(images) || images.length === 0) return;
-
   const markup = images
     .map(
       ({
@@ -67,22 +57,21 @@ export function createGallery(images) {
 
   galleryContainer.insertAdjacentHTML('beforeend', markup);
 
-  lightbox.refresh();
+  lightbox.refresh(); //
 }
 
-/** Очищає вміст контейнера галереї */
+//Очищає вміст контейнера галереї
 export function clearGallery() {
   if (!galleryContainer) return;
   galleryContainer.innerHTML = '';
 }
 
-/** Показати лоадер — додаємо клас is-loading (стилі лоадера повинен реалізувати ти) */
+//на експорт у main у main.js - loader Індикатор завантаження
 export function showLoader() {
   if (!loaderElement) return;
   loaderElement.classList.add('is-loading');
 }
 
-/** Сховати лоадер */
 export function hideLoader() {
   if (!loaderElement) return;
   loaderElement.classList.remove('is-loading');

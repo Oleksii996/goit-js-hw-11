@@ -1,7 +1,8 @@
-//У файлі main.js напиши всю логіку роботи додатка. Виклики нотифікацій iziToast, усі перевірки на довжину масиву в отриманій відповіді робимо саме в цьому файлі. Імпортуй в нього функції із файлів pixabay-api.js та render-functions.js та викликай їх у відповідний момент.
+/* 
+У файлі main.js напиши всю логіку роботи додатка. Виклики нотифікацій iziToast, усі перевірки на довжину масиву в отриманій відповіді робимо саме в цьому файлі. Імпортуй в нього функції із файлів pixabay-api.js та render-functions.js та викликай їх у відповідний момент.
+ */
 
-// main.js
-// main.js
+//імпортовані функції
 import { getImagesByQuery } from './js/pixabay-api.js';
 import {
   createGallery,
@@ -9,13 +10,15 @@ import {
   showLoader,
   hideLoader,
 } from './js/render-functions.js';
+
+// iziToast
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('.form');
 const input = form ? form.querySelector('input[name="search-text"]') : null;
 
-form?.addEventListener('submit', onSearch);
+form.addEventListener('submit', onSearch); //даю подію на форму ()
 
 async function onSearch(e) {
   e.preventDefault();
@@ -45,21 +48,8 @@ async function onSearch(e) {
       });
       return;
     }
-
-    createGallery(hits);
-
-    iziToast.success({
-      title: 'Found',
-      message: `Found ${data.totalHits ?? hits.length} images.`,
-      position: 'topRight',
-    });
-  } catch (error) {
-    iziToast.error({
-      title: 'Request failed',
-      message: 'Something went wrong. Try again later.',
-      position: 'topRight',
-    });
+    createGallery(hits); //імпортована функція
   } finally {
-    hideLoader();
+    hideLoader(); //імпортована функція
   }
 }
