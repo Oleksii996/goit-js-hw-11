@@ -20,25 +20,29 @@ const input = document.querySelector('input[name="search-text"]'); //даю зм
 
 form.addEventListener('submit', onSearch); //подія
 
-async function onSearch(e) {
-  e.preventDefault();
+function onSearch(e) {
+  e.preventDefault(); //вимкнена стандартна поведінка - браузер не перезавантажується
 
   const query = input.value.trim();
 
-  try {
-    const data = await getImagesByQuery(query);
-    const hits = Array.isArray(data?.hits) ? data.hits : [];
+  showLoader();
+  clearGallery();
 
-    if (hits.length === 0) {
-      iziToast.error({
-        message:
-          'Sorry, there are no images matching your search query. Please try again!',
-        position: 'topRight',
-      });
-      return;
-    }
-    createGallery(hits); //імпортована функція
-  } finally {
-    hideLoader(); //імпортована функція
-  }
+  getImagesByQuery(query)
+    .then(data => {
+      const hits = Array.isArray(data?.hits) ? data.hits : []; //перечитати конспект, лекції!!!
+
+      if (hits.length === 0) {
+        iziToast.error({
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+          position: 'topRight',
+        });
+        return;
+      }
+
+      createGallery(hits);
+    })
+    .catch(error => console.log(error)); //помилка вже є, тому сюди нічого не треба
+  hideLoader();
 }
