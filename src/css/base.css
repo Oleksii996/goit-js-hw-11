@@ -95,3 +95,29 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+@import 'css-loader/loader.css';
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #ccc;
+  border-bottom-color: #333;
+  border-radius: 50%;
+  margin: 20px auto;
+  animation: rotation 1s linear infinite;
+  display: none; /* прихований за замовчуванням */
+}
+
+.loader.is-loading {
+  display: block;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
