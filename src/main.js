@@ -43,6 +43,11 @@ function onSearch(e) {
 
       createGallery(hits);
     })
-    .catch(error => console.log(error)); //помилка вже є, тому сюди нічого не треба
-  hideLoader();
+    .catch(error => {
+      console.log(error); //помилка вже є по тз, то дій не потрібно
+    })
+    .finally(() => {
+      hideLoader(); // лоадер після завантаження
+      form.reset(); //скид
+    });
 }
