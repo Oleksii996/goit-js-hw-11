@@ -18,32 +18,21 @@ import 'izitoast/dist/css/iziToast.min.css';
 const form = document.querySelector('.form'); //даю змінну на форму
 const input = document.querySelector('input[name="search-text"]'); //даю змінну на інпут
 
-form.addEventListener('submit', onSearch); //даю подію на форму ()
+form.addEventListener('submit', onSearch); //подія
 
 async function onSearch(e) {
   e.preventDefault();
 
   const query = input.value.trim();
-  if (!query) {
-    iziToast.error({
-      title: 'Error',
-      message: 'Please enter a search query.',
-      position: 'topRight',
-    });
-    return;
-  }
-
-  clearGallery();
-  showLoader();
 
   try {
     const data = await getImagesByQuery(query);
     const hits = Array.isArray(data?.hits) ? data.hits : [];
 
     if (hits.length === 0) {
-      iziToast.info({
-        title: 'No results',
-        message: 'Sorry, there are no images matching your search query.',
+      iziToast.error({
+        message:
+          'Sorry, there are no images matching your search query. Please try again!',
         position: 'topRight',
       });
       return;
