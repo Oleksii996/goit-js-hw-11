@@ -1,6 +1,8 @@
 /* 
 В файлі pixabay-api.js зберігай функції для виконання HTTP-запитів:
-- getImagesByQuery(query). Ця функція повинна приймати один параметр query (пошукове слово, яке є рядком), здійснювати HTTP-запит і повертати значення властивості data з отриманої відповіді.
+- getImagesByQuery(query). 
+
+Ця функція повинна приймати один параметр query (пошукове слово, яке є рядком), здійснювати HTTP-запит і повертати значення властивості data з отриманої відповіді.
  */
 
 import axios from 'axios';
@@ -8,16 +10,9 @@ import axios from 'axios';
 const PIXABAY_API_KEY = '15998854-73128a3946d29211178091fd8'; // мій ключ
 const BASE_URL = 'https://pixabay.com/api/'; //база
 
-/**
- * Виконує запит до Pixabay і повертає response.data
- * @param {string} query - пошуковий рядок
- * @returns {Promise<object>} - об'єкт response.data від Pixabay
- */
+//функція на експорт
 export async function getImagesByQuery(query) {
-  if (typeof query !== 'string') {
-    throw new TypeError('query must be a string');
-  }
-
+  //список параметрів (підключатиметься за базовим юрл)
   const params = {
     key: PIXABAY_API_KEY,
     q: query,
@@ -27,7 +22,6 @@ export async function getImagesByQuery(query) {
     per_page: 12,
   };
 
-  const response = await axios.get(BASE_URL, { params });
-  // Згідно з завданням — повертаємо властивість data
-  return response.data;
+  const response = await axios.get(BASE_URL, { params }); //,база + параметри
+  return response.data; //повертати значення властивості data з отриманої відповіді.....
 }
